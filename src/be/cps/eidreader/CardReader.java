@@ -40,8 +40,6 @@ public class CardReader {
 	
 	public void updateFile(Identity id) {
 		
-		
-		
 		try {
 			File testExist = new File(FILENAME);
 			boolean fileExists = testExist.exists();
