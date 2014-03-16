@@ -18,6 +18,12 @@ public class PanelImage extends JPanel {
         public PanelImage(Image image) {
 			super();
 			this.image = image;
+			this.setSize(150, 150);
+		}
+
+        
+		public void setImage(Image image) {
+			this.image = image;
 		}
 
 
