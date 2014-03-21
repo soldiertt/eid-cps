@@ -1,12 +1,19 @@
 package be.cps.eidreader;
 
+import java.awt.BorderLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import be.belgium.eid.eidlib.BeID;
 import be.belgium.eid.exceptions.EIDException;
@@ -32,8 +39,26 @@ public class CardReader {
 			id = new Identity(first, last, nrn, address, photo);
 			
 		} catch (EIDException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			if (e.getMessage().equals("EID Exception: No card present")) {
+				final JFrame okFrame = new JFrame("Erreur");
+				okFrame.setLayout(new BorderLayout());
+				JLabel errorMessage = new JLabel(" Veuillez insérer une carte eID, puis recommencez !");
+				okFrame.getContentPane().add(errorMessage, BorderLayout.CENTER);
+				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+
+					public void actionPerformed(ActionEvent e) {
+						okFrame.dispose();
+						Start.buttonRead.setText(" LECTURE ");
+						Start.buttonRead.setEnabled(true);
+					}
+				});
+				okFrame.getContentPane().add(okButton, BorderLayout.SOUTH);
+				okFrame.setSize(320,100);
+				okFrame.setVisible(true);
+			} else {
+				e.printStackTrace();
+			}
 		}
 		return id;
 	}
