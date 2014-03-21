@@ -13,17 +13,18 @@ import javax.swing.WindowConstants;
 
 public class Start {
 
-	private static PanelImage panelImg;
+	public static PanelImage panelImg;
 	public static JButton buttonRead;
+	public static JFrame myFrame;
 	private static JButton buttonOK;
 	private static ReadCardThread run1;
-	private static BufferedImage bgImage;
+	public static BufferedImage bgImage;
 	
 	public static void main(String[] args) {
 
 		final CardReader cardReader = new CardReader();
 		
-		final JFrame myFrame = new JFrame("Enregistrement");
+		myFrame = new JFrame("Enregistrement");
 		myFrame.setLayout(new BorderLayout());
 		
 		buttonRead = new JButton(" LECTURE ");

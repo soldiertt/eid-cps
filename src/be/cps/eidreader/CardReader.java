@@ -42,7 +42,7 @@ public class CardReader {
 			if (e.getMessage().equals("EID Exception: No card present")) {
 				final JFrame okFrame = new JFrame("Erreur");
 				okFrame.setLayout(new BorderLayout());
-				JLabel errorMessage = new JLabel(" Veuillez insérer une carte eID, puis recommencez !");
+				JLabel errorMessage = new JLabel("  Veuillez insérer une carte eID, puis recommencez !");
 				okFrame.getContentPane().add(errorMessage, BorderLayout.CENTER);
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
@@ -51,6 +51,11 @@ public class CardReader {
 						okFrame.dispose();
 						Start.buttonRead.setText(" LECTURE ");
 						Start.buttonRead.setEnabled(true);
+						Start.panelImg.setImage(Start.bgImage);
+						Start.panelImg.repaint();
+						Start.panelImg.setVisible(true);
+						Start.myFrame.getContentPane().validate();
+						Start.myFrame.getContentPane().repaint();
 					}
 				});
 				okFrame.getContentPane().add(okButton, BorderLayout.SOUTH);
