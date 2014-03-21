@@ -17,12 +17,14 @@ public class UiUpdater implements Callback {
 
 	@Override
 	public void callback(Identity id) {
-		panelImg.setImage(id.getPhoto());
-		panelImg.repaint();
-		panelImg.setVisible(true);
-		buttonOK.setVisible(true);
-		buttonRead.setText(" LECTURE ");
-		buttonRead.setEnabled(true);
+		if (id != null) {
+			panelImg.setImage(id.getPhoto());
+			panelImg.repaint();
+			panelImg.setVisible(true);
+			buttonOK.setVisible(true);
+			buttonRead.setText(" LECTURE ");
+			buttonRead.setEnabled(true);
+		}
 	}
 
 }

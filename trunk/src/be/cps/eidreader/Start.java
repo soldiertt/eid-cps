@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
 public class Start {
 
 	private static PanelImage panelImg;
-	private static JButton buttonRead;
+	public static JButton buttonRead;
 	private static JButton buttonOK;
 	private static ReadCardThread run1;
 	private static BufferedImage bgImage;
