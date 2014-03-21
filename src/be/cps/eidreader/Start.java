@@ -3,7 +3,10 @@ package be.cps.eidreader;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -14,6 +17,7 @@ public class Start {
 	private static JButton buttonRead;
 	private static JButton buttonOK;
 	private static ReadCardThread run1;
+	private static BufferedImage bgImage;
 	
 	public static void main(String[] args) {
 
@@ -25,16 +29,25 @@ public class Start {
 		buttonRead = new JButton(" LECTURE ");
 		buttonOK = new JButton(" OK ");
 		buttonOK.setVisible(false);
-		panelImg = new PanelImage(null);
-		panelImg.setVisible(false);
+		try {
+			bgImage = ImageIO.read(Start.class.getResourceAsStream("/images/cpslogo.jpg"));
+			panelImg = new PanelImage(bgImage);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		panelImg.setVisible(true);
 		
 		buttonOK.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				
 				cardReader.updateFile(run1.getId());
-				panelImg.setVisible(false);
+				panelImg.setImage(bgImage);
+				panelImg.repaint();
 				buttonOK.setVisible(false);
+				myFrame.getContentPane().validate();
+				myFrame.getContentPane().repaint();
 			}
 		});
 		
@@ -54,7 +67,7 @@ public class Start {
 		myFrame.getContentPane().add(panelImg, BorderLayout.CENTER);
 		myFrame.getContentPane().add(buttonOK, BorderLayout.SOUTH);
 		
-		myFrame.setSize(300, 400);
+		myFrame.setSize(350, 400);
 		myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		myFrame.setVisible(true);
 
